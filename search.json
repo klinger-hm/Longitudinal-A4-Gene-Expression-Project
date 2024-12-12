@@ -58,5 +58,55 @@
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
     ]
+  },
+  {
+    "objectID": "visualizations.html",
+    "href": "visualizations.html",
+    "title": "Visualizations",
+    "section": "",
+    "text": "Longitudinal PACC",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-amyloid",
+    "href": "visualizations.html#longitudinal-amyloid",
+    "title": "Visualizations",
+    "section": "Longitudinal Amyloid",
+    "text": "Longitudinal Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-tau",
+    "href": "visualizations.html#longitudinal-tau",
+    "title": "Visualizations",
+    "section": "Longitudinal Tau",
+    "text": "Longitudinal Tau",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-p-tau217",
+    "href": "visualizations.html#longitudinal-p-tau217",
+    "title": "Visualizations",
+    "section": "Longitudinal p-tau217",
+    "text": "Longitudinal p-tau217",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#baseline-p-tau217",
+    "href": "visualizations.html#baseline-p-tau217",
+    "title": "Visualizations",
+    "section": "Baseline p-tau217",
+    "text": "Baseline p-tau217",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
   }
 ]
