@@ -12,8 +12,8 @@ book:
     - index.qmd
     - demographics.qmd
     - visualizations.qmd
-    # - manhattan_plots.qmd
-    # - part: pacc_analyses.qmd
+    - manhattan_plots.qmd
+    - part: pacc_analyses.qmd
     #   chapters: 
     #     - pacc_sensitivity_sexstratified.qmd
     #     - pacc_sensitivity_ptauinteract.qmd
