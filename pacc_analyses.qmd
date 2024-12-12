@@ -3,6 +3,7 @@ title: "Longitudinal PACC Analyses"
 date: "`r Sys.Date()`"
 output: 
   html_document:
+     prefer-html: true
 ---
 
 ```{r setup, include = FALSE, warning = FALSE, message = FALSE}
