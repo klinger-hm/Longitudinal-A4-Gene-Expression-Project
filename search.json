@@ -108,5 +108,105 @@
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
     ]
+  },
+  {
+    "objectID": "manhattan_plots.html",
+    "href": "manhattan_plots.html",
+    "title": "Manhattan Plots",
+    "section": "",
+    "text": "Phenotype ~ Gene",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex",
+    "text": "Phenotype ~ Gene x Sex",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-apoee4",
+    "href": "manhattan_plots.html#phenotype-gene-x-apoee4",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x APOEe4",
+    "text": "Phenotype ~ Gene x APOEe4",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex-x-apoee4",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex-x-apoee4",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex x APOEe4",
+    "text": "Phenotype ~ Gene x Sex x APOEe4",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-amyloid",
+    "href": "manhattan_plots.html#phenotype-gene-x-amyloid",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Amyloid",
+    "text": "Phenotype ~ Gene x Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex-x-amyloid",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex-x-amyloid",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex x Amyloid",
+    "text": "Phenotype ~ Gene x Sex x Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html",
+    "href": "pacc_analyses.html",
+    "title": "Longitudinal PACC Analyses",
+    "section": "",
+    "text": "Significant Results Table\nSummary table of all significant results (after fdr correction) from the following longitudinal PACC analyses:",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-sex-x-apoee4",
+    "href": "pacc_analyses.html#pacc-gene-x-sex-x-apoee4",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Sex x APOEe4",
+    "text": "PACC ~ Gene x Sex x APOEe4\nThere is 1 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000211745",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-amyloid",
+    "href": "pacc_analyses.html#pacc-gene-x-amyloid",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Amyloid",
+    "text": "PACC ~ Gene x Amyloid\nThere are 6 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\nPlots of select significant genes\n\nENSG00000115942ENSG00000240132",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-sex-x-amyloid",
+    "href": "pacc_analyses.html#pacc-gene-x-sex-x-amyloid",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Sex x Amyloid",
+    "text": "PACC ~ Gene x Sex x Amyloid\nThere are 118 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\nPlots of select significant genes\n\nENSG00000176371ENSG00000163082",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
   }
 ]
