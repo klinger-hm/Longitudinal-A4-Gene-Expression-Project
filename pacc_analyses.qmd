@@ -1,0 +1,440 @@
+---
+title: "Longitudinal PACC Analyses"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+---
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+```
+
+```{r}
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/A4_RNAseq_GeneNames_081424.rds")
+
+## PACC Models
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexE4_Models_2024-12-06.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneAb_Models_2024-12-05.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexAb_Models_2024-12-06.RData")
+
+# ## Amyloid Models
+# load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_GeneE4_Models_2024-12-07.RData")
+
+
+```
+
+```{r}
+gene_names <- select(gene_names, gene = ensembl_gene_id, chromosome_name, external_gene_name)
+```
+
+```{r}
+
+### Gather all baseline data for demo table (baseline is not the same across all measures)
+
+baseline <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1)
+
+bl_amyloid <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score)
+
+baseline <- merge(baseline, bl_amyloid, by = "BID", all.x = TRUE)
+
+## Calculate follow up 
+
+pacc_followup <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice_tail() %>%
+  select(BID, pacc_followup = pacc_time)
+
+baseline <- merge(baseline, pacc_followup, by = "BID", all.x = TRUE)
+
+baseline <- baseline %>%
+  mutate(pacc_followup = case_when(
+    pacc_followup == 0 ~ NA,
+    TRUE ~ pacc_followup
+  ))
+
+```
+
+# Significant Results Table
+
+Summary table of all significant results (after fdr correction) from the following longitudinal PACC analyses:
+
+1.  PACC \~ GeneExp
+2.  PACC \~ GeneExp\*Sex
+3.  PACC \~ GeneExp\*E4
+4.  PACC \~ GeneExp\*Sex\*E4
+5.  PACC \~ GeneExp\*Ab
+6.  PACC \~ GeneExp\*Ab\*Sex
+
+```{r}
+PACCTable_GeneSexE4_wDose$predictor <- "Gene*Sex*E4"
+PACCTable_GeneAb_wDose$predictor <- "Gene*Ab"
+PACCTable_GeneSexAb_wDose$predictor <- "Gene*Sex*Ab"
+
+All_Genes <- rbind.fill(PACCTable_GeneSexE4_wDose, 
+                        PACCTable_GeneAb_wDose, PACCTable_GeneSexAb_wDose)
+
+All_Genes_Sig <- filter(All_Genes, fdr_p < 0.05)
+all_sig_genes <- unique(All_Genes_Sig$gene)
+```
+
+```{r}
+datatable(All_Genes_Sig,
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>% 
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+```{r}
+
+```
+
+# Analyses {.tabset}
+
+All models are adjusted for sex, baseline age, years of education, cohort/treatment (A4 Placebo, A4 Treated, LEARN/SF), PACC story version, and cumulative dose. PACC story version and cumulative dose are time varying variables.
+
+## PACC \~ Gene x Sex x APOEe4 {.tabset}
+
+```{r}
+PACCTable_GeneSexE4 <- PACCTable_GeneSexE4_wDose %>%
+  left_join(gene_names, by = "gene") %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+There is `r length(subset(PACCTable_GeneSexE4, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
+
+### Volcano Plot
+
+```{r}
+sig_bon <- -log10(0.05/length(unique(PACCTable_GeneSexE4$gene))) #Bonferroni correction for plotting
+
+ggplot(PACCTable_GeneSexE4, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = -6, y = 0.75, label = "p = 0.05", check_overlap = TRUE, color = "black") +
+  geom_text(x = -6, y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE, color = "black") +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 6 | beta < -5, gene, "")), 
+                   nudge_x = -0.05, nudge_y = 0.04, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*Sex*APOEe4 Non-Adjusted P-Values"
+  )
+
+# plot without outlier
+ggplot(subset(PACCTable_GeneSexE4, beta > -5), aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = (-0.85*max(PACCTable_GeneSexE4$beta)), y = (-log10(0.05)-0.25), label = "p = 0.05", check_overlap = TRUE, color = "black") +
+  geom_text(x = (-0.75*max(PACCTable_GeneSexE4$beta)), y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE, color = "black") +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 6 | beta < -5, gene, "")), 
+                   nudge_x = -0.05, nudge_y = 0.04, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*Sex*APOEe4 Non-Adjusted P-Values"
+  )
+```
+
+### Summary Table
+
+```{r}
+datatable(subset(PACCTable_GeneSexE4, Sig == T),
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+```{r}
+rna$SEX <- as.factor(rna$SEX)
+rna$APOE <- as.factor(rna$APOE)
+rna$Cohort <- as.factor(rna$Cohort)
+rna$QSVERSION <- as.factor(rna$QSVERSION)
+```
+
+### Significant Results Plots {.tabset}
+
+::: panel-tabset
+#### ENSG00000211745
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000211745*SEX*APOE*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000211745", "SEX", "APOE")) +
+  #theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by TRBV4-2, Sex, and APOEε4"),
+    color = "ENSG00000233785\n(TRBV4-2)"
+  )
+```
+:::
+
+## PACC \~ Gene x Amyloid {.tabset}
+
+```{r}
+PACCTable_GeneAb <- PACCTable_GeneAb_wDose %>%
+  left_join(gene_names, by = "gene") %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+There are `r length(subset(PACCTable_GeneAb, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
+
+### Volcano Plot
+
+```{r}
+sig_bon <- -log10(0.05/length(unique(PACCTable_GeneAb$gene))) #Bonferroni correction for plotting
+
+ggplot(PACCTable_GeneAb, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = (0.92*max(PACCTable_GeneAb$beta)), y = (-log10(0.05)-0.25), label = "p = 0.05", check_overlap = TRUE) +
+  geom_text(x = (0.7*max(PACCTable_GeneAb$beta)), y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE) +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 5.5, gene, "")), 
+                   nudge_x = -0.5, nudge_y = 0.05, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*Amyloid Burden Non-Adjusted P-Values"
+  )
+```
+
+### Summary Table
+
+```{r}
+datatable(subset(PACCTable_GeneAb, Sig == T),
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+```{r}
+bl_amyloid <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score)
+
+rna <- merge(rna, bl_amyloid, by = "BID")
+```
+
+### Significant Results Plots {.tabset}
+
+Plots of select significant genes
+
+::: panel-tabset
+#### ENSG00000115942
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000115942*bl_Amyloid*pacc_time + SEX*pacc_time + bl_pacc_age*pacc_time + EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000115942", "bl_Amyloid")) +
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by ORC2 and Amyloid Status"),
+    color = "ENSG00000115942\n(ORC2)"
+  )
+```
+
+#### ENSG00000240132
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000240132*bl_Amyloid*pacc_time + SEX*pacc_time + bl_pacc_age*pacc_time + EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000240132", "bl_Amyloid")) +
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by ETF1P2 and Amyloid Status"),
+    color = "ENSG00000240132\n(ETF1P2)"
+  )
+```
+:::
+
+## PACC \~ Gene x Sex x Amyloid {.tabset}
+
+```{r}
+PACCTable_GeneSexAb <- PACCTable_GeneSexAb_wDose %>%
+  left_join(gene_names, by = "gene") %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+There are `r length(subset(PACCTable_GeneSexAb, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
+
+### Volcano Plot
+
+```{r}
+sig_bon <- -log10(0.05/length(unique(PACCTable_GeneSexAb$gene))) #Bonferroni correction for plotting
+
+ggplot(PACCTable_GeneSexAb, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = -30, y = (-log10(0.05)-0.25), label = "p = 0.05", check_overlap = TRUE, color = "black") +
+  geom_text(x = -27, y = (sig_bon-0.45), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE, color = "black") +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 5.5 | beta < -20, gene, "")), 
+                   nudge_x = -0.5, nudge_y = 0.05, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*Sex*Amyloid Burden Non-Adjusted P-Values"
+  )
+
+#plot without outlier
+ggplot(subset(PACCTable_GeneSexAb, beta > -20), aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = -13, y = (-log10(0.05)-0.35), label = "p = 0.05", check_overlap = TRUE, color = "black") +
+  geom_text(x = -12, y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE, color = "black") +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 6, gene, "")), 
+                   nudge_x = -0.9, nudge_y = 0.05, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*Sex*Amyloid Burden Non-Adjusted P-Values"
+  )
+```
+
+### Summary Table {.tabset}
+
+```{r}
+datatable(subset(PACCTable_GeneSexAb, fdr_p < 0.05),
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+### Significant Results Plots
+
+Plots of select significant genes
+
+::: panel-tabset
+#### ENSG00000176371
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000176371*bl_Amyloid*SEX*pacc_time + bl_pacc_age*pacc_time + EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+p <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000176371", "bl_Amyloid", "SEX"))
+
+p[[1]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by ZSCAN2, Sex, and Amyloid Status"),
+    color = "ENSG00000176371\n(ZSCAN2)"
+  ) +
+p[[2]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    color = "ENSG00000176371\n(ZSCAN2)"
+  )
+```
+
+#### ENSG00000163082
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000163082*bl_Amyloid*SEX*pacc_time + bl_pacc_age*pacc_time + EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+p <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000163082", "bl_Amyloid", "SEX"))
+
+p[[1]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by SGPP2, Sex, and Amyloid Status"),
+    color = "ENSG00000163082\n(SGPP2)"
+  ) +
+p[[2]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    color = "ENSG00000163082\n(SGPP2)"
+  )
+```
+:::

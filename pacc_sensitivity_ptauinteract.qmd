@@ -1,0 +1,141 @@
+# Sensitivity Analysis: p-tau interaction
+
+## PACC \~ GeneExp x p-tau217
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+```
+
+```{r}
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/A4_RNAseq_GeneNames_081424.rds")
+
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GenePtau_Models_2024-12-11.RData")
+```
+
+```{r}
+gene_names <- select(gene_names, gene = ensembl_gene_id, chromosome_name, external_gene_name)
+```
+
+```{r}
+PACCTable_GenePtau_wDose <- PACCTable_GenePtau_wDose %>%
+  left_join(gene_names, by = "gene") %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+There are `r length(subset(PACCTable_GenePtau_wDose, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
+
+## Volcano Plot
+
+```{r}
+sig_bon <- -log10(0.05/length(unique(PACCTable_GenePtau_wDose$gene))) #Bonferroni correction for plotting
+
+ggplot(PACCTable_GenePtau_wDose, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position = "none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = 28, y = 0.8, label = "p = 0.05", check_overlap = TRUE, color = "black") +
+  geom_text(x = 24, y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE, color = "black") +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 5.4, gene, "")), 
+                   nudge_x = -0.05, nudge_y = 0.04, min.segment.length = 0) +
+  labs(
+    title = "PACC ~ Gene*p-tau217 Non-Adjusted P-Values"
+  )
+```
+
+## Summary Table
+
+```{r}
+datatable(subset(PACCTable_GenePtau_wDose, Sig == T),
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+```{r}
+rna$SEX <- as.factor(rna$SEX)
+rna$APOE <- as.factor(rna$APOE)
+rna$Cohort <- as.factor(rna$Cohort)
+rna$QSVERSION <- as.factor(rna$QSVERSION)
+
+bl <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score, bl_ptau217 = ptau217)
+
+rna <- merge(rna, bl, by = "BID", all.x = TRUE)
+
+
+rna_ptau <- filter(rna, !is.na(bl_ptau217) & bl_ptau217 != "")
+rna_ptau <- arrange(rna_ptau, pacc_time)
+rna_ptau$bl_ptau217 <- as.numeric(rna_ptau$bl_ptau217)
+```
+
+## Significant Results Plots {.tabset}
+
+::: panel-tabset
+### ENSG00000278434
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000278434*bl_ptau217*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna_ptau, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000278434", "bl_ptau217")) +
+  #theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by TRAF5 and Baseline p-tau217"),
+    color = "ENSG00000278434\n(TRAF5)"
+  )
+```
+
+### ENSG00000225981
+
+```{r, fig.width = 12}
+fit <- lme(PACC ~ ENSG00000225981*bl_ptau217*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna_ptau, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000225981", "bl_ptau217")) +
+  #theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote("Longitudinal PACC by MICALL2-DT and Baseline p-tau217"),
+    color = "ENSG00000225981\n(MICALL2-DT)"
+  )
+```
+:::
