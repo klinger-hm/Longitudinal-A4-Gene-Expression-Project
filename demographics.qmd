@@ -1,0 +1,328 @@
+---
+title: "Demographics"
+---
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+```
+
+```{r}
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
+
+```
+
+```{r}
+### Gather all baseline data for demo table (baseline is not the same across all measures)
+
+baseline <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1)
+
+bl_amyloid <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score)
+
+bl_tau <- rna %>%
+  filter(!is.na(MTL)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_MTL = MTL, bl_NEO = NEO)
+
+bl_ptau <- rna %>%
+  filter(!is.na(ptau217)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_ptau217 = ptau217, bl_ptau_age_new = ptau_age)
+
+baseline <- merge(baseline, bl_amyloid, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, bl_tau, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, bl_ptau, by = "BID", all.x = TRUE)
+
+## Calculate follow up 
+
+pacc_followup <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice_tail() %>%
+  select(BID, pacc_followup = pacc_time)
+
+ab_followup <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, ab_time) %>%
+  slice_tail() %>%
+  select(BID, ab_followup = ab_time)
+
+tau_followup <- rna %>%
+  filter(!is.na(tau_scan_number)) %>%
+  group_by(BID) %>%
+  arrange(BID, tau_time) %>%
+  slice_tail() %>%
+  select(BID, tau_followup = tau_time)
+
+ptau_followup <- rna %>%
+  filter(!is.na(ptau217)) %>%
+  group_by(BID) %>%
+  arrange(BID, ptau_time) %>%
+  slice_tail() %>%
+  select(BID, ptau_followup = ptau_time)
+
+baseline <- merge(baseline, pacc_followup, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, ab_followup, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, tau_followup, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, ptau_followup, by = "BID", all.x = TRUE)
+
+
+baseline <- baseline %>%
+  mutate(pacc_followup = case_when(
+    pacc_followup == 0 ~ NA,
+    TRUE ~ pacc_followup
+  ),
+  ab_followup = case_when(
+    ab_followup == 0 ~ NA,
+    TRUE ~ ab_followup
+  ),
+  tau_followup = case_when(
+    tau_followup == 0 ~ NA,
+    TRUE ~ tau_followup),
+  ptau_followup = case_when(
+    ptau_followup == 0 ~ NA,
+    TRUE ~ ptau_followup)
+  )
+
+```
+
+## PACC Sample
+
+::: {.panel-tabset}
+
+### All Participants
+
+```{r}
+tbl_summary(baseline,
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+### Longitudinal Participants
+
+Demographics for participants with at least two PACC visits
+
+```{r}
+tbl_summary(subset(baseline, pacc_tp > 1),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort,
+                        pacc_tp, pacc_followup), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group", pacc_tp ~ "PACC Timepoints", 
+                         pacc_followup ~ "PACC Years of Follow Up"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+:::
+
+## Amyloid Sample
+
+::: {.panel-tabset}
+
+### All Participants
+
+```{r}
+tbl_summary(subset(baseline, !is.na(bl_Amyloid)),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+### Longitudinal Participants
+
+Demographics for participants with at least two amyloid scans
+
+```{r}
+tbl_summary(subset(baseline, !is.na(bl_Amyloid) & ab_tp > 1),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort,
+                        pacc_tp, pacc_followup), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group", pacc_tp ~ "PACC Timepoints", 
+                         pacc_followup ~ "PACC Years of Follow Up"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+:::
+
+## TAU Sample
+
+::: {.panel-tabset}
+
+### All Participants
+
+```{r}
+tbl_summary(subset(baseline, !is.na(tau_tp)),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+### Longitudinal Participants
+
+Demographics for participants with at least two tau scans
+
+```{r}
+tbl_summary(subset(baseline, !is.na(tau_tp) & tau_tp > 1),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort,
+                        pacc_tp, pacc_followup), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group", pacc_tp ~ "PACC Timepoints", 
+                         pacc_followup ~ "PACC Years of Follow Up"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+:::
+
+## pTAU Sample
+
+::: {.panel-tabset}
+
+### All Participants
+
+```{r}
+tbl_summary(subset(baseline, !is.na(bl_ptau217)),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+### Longitudinal Participants
+
+Demographics for participants with at least two ptau visits
+
+```{r}
+tbl_summary(subset(baseline, !is.na(bl_ptau217) & ptau_tp > 1),
+            missing = "no",
+            by = SUBSTUDY,
+            include = c(bl_pacc_age, SEX, EDCCNTU, APOE, PACC, 
+                        bl_AmyloidStatus, bl_Amyloid, Cohort,
+                        pacc_tp, pacc_followup), 
+            statistic = list(all_continuous()  ~ c("{mean} ({sd}) \n [{min}, {max}]")),
+            label = list(bl_pacc_age ~ "Baseline Age", SEX = "Sex", 
+                         EDCCNTU ~ "Years of Education",
+                         APOE ~ "APOEe4 Status", PACC ~ "PACC Score", 
+                         bl_AmyloidStatus ~ "Baseline Amyloid Status",
+                         bl_Amyloid ~ "Baseline Global Amyloid Burden", 
+                         Cohort ~ "Treatment Group", pacc_tp ~ "PACC Timepoints", 
+                         pacc_followup ~ "PACC Years of Follow Up"),
+            digits = list(all_continuous() ~ c(2,2,2,2), all_categorical() ~ c(0,2))) %>%
+  add_n() %>%
+  add_overall() %>%
+  as_flex_table() %>%
+  bold(part = "header")
+```
+
+:::
