@@ -1,0 +1,300 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Longitudinal A4 & Gene Expression Project",
+    "section": "",
+    "text": "The data used for this project includes all A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.\nProject Aims:\n\nTest the association of gene expression with longitudinal PACC, longitudinal amyloid, longitudinal tau, longitudinal ptau, and baseline ptau.\nSee if these associations are modified by sex, APOEe4 status, sex x APOEe4 status, amyloid burden, amyloid burden x sex.\n\nSensitivity Analyses:\n\nRun significant sex moderated models in just females and just males.\nRun analyses in just LEARN vs A4 Placebo and LEARN vs A4 Treated.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Project Overview</span>"
+    ]
+  },
+  {
+    "objectID": "demographics.html",
+    "href": "demographics.html",
+    "title": "Demographics",
+    "section": "",
+    "text": "PACC Sample",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
+    ]
+  },
+  {
+    "objectID": "demographics.html#pacc-sample",
+    "href": "demographics.html#pacc-sample",
+    "title": "Demographics",
+    "section": "",
+    "text": "All ParticipantsLongitudinal Participants\n\n\n\n\nCharacteristicNOverall, N = 1,7371A4, N = 4591LEARN, N = 3111SF, N = 9671Baseline Age1,73771.31 (4.70) [64.63, 85.89]71.97 (4.81) [65.00, 85.51]70.36 (4.31) [65.00, 84.46]71.30 (4.72) [64.63, 85.89]Sex1,737Female1,083 (62.35%)291 (63.40%)189 (60.77%)603 (62.36%)Male654 (37.65%)168 (36.60%)122 (39.23%)364 (37.64%)Years of Education1,73716.55 (2.75) [7.00, 32.00]16.56 (2.72) [7.00, 30.00]16.57 (2.46) [9.00, 27.00]16.54 (2.86) [10.00, 32.00]APOEe4 Status1,715e4-1,116 (65.07%)193 (42.05%)232 (75.08%)691 (72.97%)e4+599 (34.93%)266 (57.95%)77 (24.92%)256 (27.03%)PACC Score1,737-0.81 (2.33) [-12.08, 5.58]-1.15 (2.43) [-11.15, 5.17]-0.71 (2.24) [-6.79, 4.38]-0.68 (2.31) [-12.08, 5.58]Baseline Amyloid Status1,737Ab-1,278 (73.58%)0 (0.00%)311 (100.00%)967 (100.00%)Ab+459 (26.42%)459 (100.00%)0 (0.00%)0 (0.00%)Baseline Global Amyloid Burden1,7371.09 (0.19) [0.79, 2.00]1.33 (0.16) [1.01, 2.00]0.99 (0.07) [0.79, 1.15]1.01 (0.11) [0.81, 1.84]Treatment Group1,737A4 Placebo236 (13.59%)236 (51.42%)0 (0.00%)0 (0.00%)A4 Treated223 (12.84%)223 (48.58%)0 (0.00%)0 (0.00%)LEARN/SF1,278 (73.58%)0 (0.00%)311 (100.00%)967 (100.00%)1Mean (SD)  [Range]; n (%)\n\n\n\n\nDemographics for participants with at least two PACC visits\n\n\nCharacteristicNOverall, N = 7711A4, N = 4591LEARN, N = 3111SF, N = 11Baseline Age77171.33 (4.68) [65.00, 85.51]71.97 (4.81) [65.00, 85.51]70.36 (4.31) [65.00, 84.46]77.34 (NA) [77.34, 77.34]Sex771Female481 (62.39%)291 (63.40%)189 (60.77%)1 (100.00%)Male290 (37.61%)168 (36.60%)122 (39.23%)0 (0.00%)Years of Education77116.57 (2.61) [7.00, 30.00]16.56 (2.72) [7.00, 30.00]16.57 (2.46) [9.00, 27.00]16.00 (NA) [16.00, 16.00]APOEe4 Status769e4-425 (55.27%)193 (42.05%)232 (75.08%)0 (0.00%)e4+344 (44.73%)266 (57.95%)77 (24.92%)1 (100.00%)PACC Score771-0.97 (2.36) [-11.15, 5.17]-1.15 (2.43) [-11.15, 5.17]-0.71 (2.24) [-6.79, 4.38]0.25 (NA) [0.25, 0.25]Baseline Amyloid Status771Ab-312 (40.47%)0 (0.00%)311 (100.00%)1 (100.00%)Ab+459 (59.53%)459 (100.00%)0 (0.00%)0 (0.00%)Baseline Global Amyloid Burden7711.19 (0.21) [0.79, 2.00]1.33 (0.16) [1.01, 2.00]0.99 (0.07) [0.79, 1.15]1.18 (NA) [1.18, 1.18]Treatment Group771A4 Placebo236 (30.61%)236 (51.42%)0 (0.00%)0 (0.00%)A4 Treated223 (28.92%)223 (48.58%)0 (0.00%)0 (0.00%)LEARN/SF312 (40.47%)0 (0.00%)311 (100.00%)1 (100.00%)PACC Timepoints77112.07 (4.12) [2.00, 18.00]12.31 (4.08) [2.00, 18.00]11.75 (4.13) [2.00, 18.00]2.00 (NA) [2.00, 2.00]PACC Years of Follow Up7455.27 (2.05) [0.12, 7.60]5.25 (1.96) [0.18, 7.46]5.31 (2.16) [0.12, 7.60]0.33 (NA) [0.33, 0.33]1Mean (SD)  [Range]; n (%)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
+    ]
+  },
+  {
+    "objectID": "demographics.html#amyloid-sample",
+    "href": "demographics.html#amyloid-sample",
+    "title": "Demographics",
+    "section": "Amyloid Sample",
+    "text": "Amyloid Sample\n\nAll ParticipantsLongitudinal Participants\n\n\n\n\nCharacteristicNOverall, N = 1,7371A4, N = 4591LEARN, N = 3111SF, N = 9671Baseline Age1,73771.31 (4.70) [64.63, 85.89]71.97 (4.81) [65.00, 85.51]70.36 (4.31) [65.00, 84.46]71.30 (4.72) [64.63, 85.89]Sex1,737Female1,083 (62.35%)291 (63.40%)189 (60.77%)603 (62.36%)Male654 (37.65%)168 (36.60%)122 (39.23%)364 (37.64%)Years of Education1,73716.55 (2.75) [7.00, 32.00]16.56 (2.72) [7.00, 30.00]16.57 (2.46) [9.00, 27.00]16.54 (2.86) [10.00, 32.00]APOEe4 Status1,715e4-1,116 (65.07%)193 (42.05%)232 (75.08%)691 (72.97%)e4+599 (34.93%)266 (57.95%)77 (24.92%)256 (27.03%)PACC Score1,737-0.81 (2.33) [-12.08, 5.58]-1.15 (2.43) [-11.15, 5.17]-0.71 (2.24) [-6.79, 4.38]-0.68 (2.31) [-12.08, 5.58]Baseline Amyloid Status1,737Ab-1,278 (73.58%)0 (0.00%)311 (100.00%)967 (100.00%)Ab+459 (26.42%)459 (100.00%)0 (0.00%)0 (0.00%)Baseline Global Amyloid Burden1,7371.09 (0.19) [0.79, 2.00]1.33 (0.16) [1.01, 2.00]0.99 (0.07) [0.79, 1.15]1.01 (0.11) [0.81, 1.84]Treatment Group1,737A4 Placebo236 (13.59%)236 (51.42%)0 (0.00%)0 (0.00%)A4 Treated223 (12.84%)223 (48.58%)0 (0.00%)0 (0.00%)LEARN/SF1,278 (73.58%)0 (0.00%)311 (100.00%)967 (100.00%)1Mean (SD)  [Range]; n (%)\n\n\n\n\nDemographics for participants with at least two amyloid scans\n\n\nCharacteristicNOverall, N = 5361A4, N = 3671LEARN, N = 1691Baseline Age53671.17 (4.59) [65.00, 85.26]71.77 (4.68) [65.00, 85.26]69.88 (4.13) [65.00, 81.73]Sex536Female346 (64.55%)237 (64.58%)109 (64.50%)Male190 (35.45%)130 (35.42%)60 (35.50%)Years of Education53616.55 (2.52) [7.00, 27.00]16.50 (2.63) [7.00, 27.00]16.65 (2.26) [12.00, 21.00]APOEe4 Status535e4-283 (52.90%)148 (40.33%)135 (80.36%)e4+252 (47.10%)219 (59.67%)33 (19.64%)PACC Score536-0.84 (2.40) [-11.15, 5.17]-1.05 (2.44) [-11.15, 5.17]-0.38 (2.26) [-6.73, 4.38]Baseline Amyloid Status536Ab-169 (31.53%)0 (0.00%)169 (100.00%)Ab+367 (68.47%)367 (100.00%)0 (0.00%)Baseline Global Amyloid Burden5361.23 (0.21) [0.83, 2.00]1.33 (0.16) [1.01, 2.00]0.99 (0.07) [0.83, 1.15]Treatment Group536A4 Placebo189 (35.26%)189 (51.50%)0 (0.00%)A4 Treated178 (33.21%)178 (48.50%)0 (0.00%)LEARN/SF169 (31.53%)0 (0.00%)169 (100.00%)PACC Timepoints53613.94 (2.68) [3.00, 18.00]13.66 (2.93) [3.00, 18.00]14.56 (1.90) [9.00, 18.00]PACC Years of Follow Up5186.13 (1.30) [0.42, 7.60]5.89 (1.40) [0.42, 7.46]6.70 (0.78) [4.36, 7.60]1Mean (SD)  [Range]; n (%)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
+    ]
+  },
+  {
+    "objectID": "demographics.html#tau-sample",
+    "href": "demographics.html#tau-sample",
+    "title": "Demographics",
+    "section": "TAU Sample",
+    "text": "TAU Sample\n\nAll ParticipantsLongitudinal Participants\n\n\n\n\nCharacteristicNOverall, N = 2441A4, N = 1961LEARN, N = 461SF, N = 21Baseline Age24471.65 (4.74) [65.00, 85.51]72.11 (4.64) [65.00, 85.51]69.47 (4.53) [65.08, 84.46]77.04 (4.29) [74.00, 80.07]Sex244Female153 (62.70%)127 (64.80%)26 (56.52%)0 (0.00%)Male91 (37.30%)69 (35.20%)20 (43.48%)2 (100.00%)Years of Education24416.34 (2.74) [9.00, 30.00]16.26 (2.82) [9.00, 30.00]16.74 (2.39) [12.00, 20.00]16.00 (0.00) [16.00, 16.00]APOEe4 Status244e4-120 (49.18%)87 (44.39%)33 (71.74%)0 (0.00%)e4+124 (50.82%)109 (55.61%)13 (28.26%)2 (100.00%)PACC Score244-1.06 (2.59) [-11.15, 5.17]-1.26 (2.51) [-11.15, 5.17]0.02 (2.47) [-6.33, 4.38]-5.74 (4.12) [-8.66, -2.83]Baseline Amyloid Status244Ab-48 (19.67%)0 (0.00%)46 (100.00%)2 (100.00%)Ab+196 (80.33%)196 (100.00%)0 (0.00%)0 (0.00%)Baseline Global Amyloid Burden2441.28 (0.20) [0.86, 1.85]1.34 (0.16) [1.05, 1.85]1.00 (0.06) [0.86, 1.11]1.60 (0.02) [1.58, 1.61]Treatment Group244A4 Placebo100 (40.98%)100 (51.02%)0 (0.00%)0 (0.00%)A4 Treated96 (39.34%)96 (48.98%)0 (0.00%)0 (0.00%)LEARN/SF48 (19.67%)0 (0.00%)46 (100.00%)2 (100.00%)1Mean (SD)  [Range]; n (%)\n\n\n\n\nDemographics for participants with at least two tau scans\n\n\nCharacteristicNOverall, N = 2171A4, N = 1741LEARN, N = 431Baseline Age21771.59 (4.68) [65.00, 85.51]72.10 (4.57) [65.00, 85.51]69.54 (4.63) [65.08, 84.46]Sex217Female137 (63.13%)112 (64.37%)25 (58.14%)Male80 (36.87%)62 (35.63%)18 (41.86%)Years of Education21716.35 (2.73) [11.00, 30.00]16.26 (2.80) [11.00, 30.00]16.70 (2.43) [12.00, 20.00]APOEe4 Status217e4-109 (50.23%)78 (44.83%)31 (72.09%)e4+108 (49.77%)96 (55.17%)12 (27.91%)PACC Score217-1.05 (2.57) [-11.15, 5.17]-1.30 (2.55) [-11.15, 5.17]-0.04 (2.45) [-6.33, 4.38]Baseline Amyloid Status217Ab-43 (19.82%)0 (0.00%)43 (100.00%)Ab+174 (80.18%)174 (100.00%)0 (0.00%)Baseline Global Amyloid Burden2171.27 (0.20) [0.86, 1.85]1.34 (0.16) [1.07, 1.85]1.00 (0.06) [0.86, 1.11]Treatment Group217A4 Placebo87 (40.09%)87 (50.00%)0 (0.00%)A4 Treated87 (40.09%)87 (50.00%)0 (0.00%)LEARN/SF43 (19.82%)0 (0.00%)43 (100.00%)PACC Timepoints21713.65 (2.63) [6.00, 18.00]13.79 (2.55) [6.00, 18.00]13.07 (2.87) [6.00, 17.00]PACC Years of Follow Up2085.97 (1.26) [1.88, 7.56]5.96 (1.19) [1.88, 7.46]6.05 (1.56) [2.06, 7.56]1Mean (SD)  [Range]; n (%)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
+    ]
+  },
+  {
+    "objectID": "demographics.html#ptau-sample",
+    "href": "demographics.html#ptau-sample",
+    "title": "Demographics",
+    "section": "pTAU Sample",
+    "text": "pTAU Sample\n\nAll ParticipantsLongitudinal Participants\n\n\n\n\nCharacteristicNOverall, N = 7241A4, N = 4451LEARN, N = 2791Baseline Age72471.29 (4.70) [65.00, 85.51]71.98 (4.83) [65.00, 85.51]70.19 (4.27) [65.00, 84.46]Sex724Female457 (63.12%)284 (63.82%)173 (62.01%)Male267 (36.88%)161 (36.18%)106 (37.99%)Years of Education72416.53 (2.60) [7.00, 30.00]16.53 (2.71) [7.00, 30.00]16.53 (2.42) [9.00, 26.00]APOEe4 Status723e4-398 (55.05%)187 (42.02%)211 (75.90%)e4+325 (44.95%)258 (57.98%)67 (24.10%)PACC Score724-0.92 (2.38) [-11.15, 5.17]-1.14 (2.45) [-11.15, 5.17]-0.57 (2.23) [-6.73, 4.38]Baseline Amyloid Status724Ab-279 (38.54%)0 (0.00%)279 (100.00%)Ab+445 (61.46%)445 (100.00%)0 (0.00%)Baseline Global Amyloid Burden7241.20 (0.21) [0.83, 2.00]1.33 (0.16) [1.01, 2.00]1.00 (0.07) [0.83, 1.15]Treatment Group724A4 Placebo228 (31.49%)228 (51.24%)0 (0.00%)A4 Treated217 (29.97%)217 (48.76%)0 (0.00%)LEARN/SF279 (38.54%)0 (0.00%)279 (100.00%)1Mean (SD)  [Range]; n (%)\n\n\n\n\nDemographics for participants with at least two ptau visits\n\n\nCharacteristicNOverall, N = 5981A4, N = 4261LEARN, N = 1721Baseline Age59871.41 (4.72) [65.00, 85.51]72.03 (4.85) [65.00, 85.51]69.90 (4.01) [65.00, 82.00]Sex598Female382 (63.88%)272 (63.85%)110 (63.95%)Male216 (36.12%)154 (36.15%)62 (36.05%)Years of Education59816.58 (2.60) [7.00, 30.00]16.52 (2.74) [7.00, 30.00]16.72 (2.24) [12.00, 21.00]APOEe4 Status598e4-321 (53.68%)183 (42.96%)138 (80.23%)e4+277 (46.32%)243 (57.04%)34 (19.77%)PACC Score598-0.87 (2.42) [-11.15, 5.17]-1.11 (2.45) [-11.15, 5.17]-0.29 (2.25) [-6.73, 4.38]Baseline Amyloid Status598Ab-172 (28.76%)0 (0.00%)172 (100.00%)Ab+426 (71.24%)426 (100.00%)0 (0.00%)Baseline Global Amyloid Burden5981.23 (0.21) [0.83, 2.00]1.33 (0.16) [1.01, 2.00]0.99 (0.07) [0.83, 1.15]Treatment Group598A4 Placebo220 (36.79%)220 (51.64%)0 (0.00%)A4 Treated206 (34.45%)206 (48.36%)0 (0.00%)LEARN/SF172 (28.76%)0 (0.00%)172 (100.00%)PACC Timepoints59813.06 (3.54) [2.00, 18.00]12.58 (3.85) [2.00, 18.00]14.26 (2.17) [7.00, 18.00]PACC Years of Follow Up5805.69 (1.74) [0.18, 7.60]5.35 (1.86) [0.18, 7.46]6.57 (0.95) [3.08, 7.60]1Mean (SD)  [Range]; n (%)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographics</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html",
+    "href": "visualizations.html",
+    "title": "Visualizations",
+    "section": "",
+    "text": "Longitudinal PACC",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-amyloid",
+    "href": "visualizations.html#longitudinal-amyloid",
+    "title": "Visualizations",
+    "section": "Longitudinal Amyloid",
+    "text": "Longitudinal Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-tau",
+    "href": "visualizations.html#longitudinal-tau",
+    "title": "Visualizations",
+    "section": "Longitudinal Tau",
+    "text": "Longitudinal Tau",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#longitudinal-p-tau217",
+    "href": "visualizations.html#longitudinal-p-tau217",
+    "title": "Visualizations",
+    "section": "Longitudinal p-tau217",
+    "text": "Longitudinal p-tau217",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "visualizations.html#baseline-p-tau217",
+    "href": "visualizations.html#baseline-p-tau217",
+    "title": "Visualizations",
+    "section": "Baseline p-tau217",
+    "text": "Baseline p-tau217",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Visualizations</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html",
+    "href": "manhattan_plots.html",
+    "title": "Manhattan Plots",
+    "section": "",
+    "text": "Phenotype ~ Gene",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex",
+    "text": "Phenotype ~ Gene x Sex",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-apoee4",
+    "href": "manhattan_plots.html#phenotype-gene-x-apoee4",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x APOEe4",
+    "text": "Phenotype ~ Gene x APOEe4",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex-x-apoee4",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex-x-apoee4",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex x APOEe4",
+    "text": "Phenotype ~ Gene x Sex x APOEe4",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-amyloid",
+    "href": "manhattan_plots.html#phenotype-gene-x-amyloid",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Amyloid",
+    "text": "Phenotype ~ Gene x Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "manhattan_plots.html#phenotype-gene-x-sex-x-amyloid",
+    "href": "manhattan_plots.html#phenotype-gene-x-sex-x-amyloid",
+    "title": "Manhattan Plots",
+    "section": "Phenotype ~ Gene x Sex x Amyloid",
+    "text": "Phenotype ~ Gene x Sex x Amyloid",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Manhattan Plots</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html",
+    "href": "pacc_analyses.html",
+    "title": "Longitudinal PACC Analyses",
+    "section": "",
+    "text": "Significant Results Table\nSummary table of all significant results (after fdr correction) from the following longitudinal PACC analyses:",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-sex-x-apoee4",
+    "href": "pacc_analyses.html#pacc-gene-x-sex-x-apoee4",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Sex x APOEe4",
+    "text": "PACC ~ Gene x Sex x APOEe4\nThere is 1 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000211745",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-amyloid",
+    "href": "pacc_analyses.html#pacc-gene-x-amyloid",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Amyloid",
+    "text": "PACC ~ Gene x Amyloid\nThere are 6 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\nPlots of select significant genes\n\nENSG00000115942ENSG00000240132",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#pacc-gene-x-sex-x-amyloid",
+    "href": "pacc_analyses.html#pacc-gene-x-sex-x-amyloid",
+    "title": "Longitudinal PACC Analyses",
+    "section": "PACC ~ Gene x Sex x Amyloid",
+    "text": "PACC ~ Gene x Sex x Amyloid\nThere are 118 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\nPlots of select significant genes\n\nENSG00000176371ENSG00000163082",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html",
+    "href": "pacc_sensitivity_sexstratified.html",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "",
+    "text": "Females\nThe following analysis include running PACC ~ GeneExp*Ab in only males and only females in the genes that survived FDR correction in the PACC ~ GeneExp*Sex*Ab analyses.",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html#females",
+    "href": "pacc_sensitivity_sexstratified.html#females",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "",
+    "text": "Summary Table\n\n\n\n\n\n\n\n\nPlotted Output\n\nENSG00000205356ENSG00000162543",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html#males",
+    "href": "pacc_sensitivity_sexstratified.html#males",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "Males",
+    "text": "Males\n\nSummary Table\n\n\n\n\n\n\n\n\nPlotted Output\n\nENSG00000279245ENSG00000164308",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html",
+    "href": "pacc_sensitivity_ptauinteract.html",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "",
+    "text": "PACC ~ GeneExp x p-tau217\nThere are 17 significant gene that survives FDR correction.",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#volcano-plot",
+    "href": "pacc_sensitivity_ptauinteract.html#volcano-plot",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Volcano Plot",
+    "text": "Volcano Plot",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#summary-table",
+    "href": "pacc_sensitivity_ptauinteract.html#summary-table",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Summary Table",
+    "text": "Summary Table",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
+    "href": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Significant Results Plots",
+    "text": "Significant Results Plots\n\nENSG00000278434ENSG00000225981",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_treatvsplacebo.html",
+    "href": "pacc_sensitivity_treatvsplacebo.html",
+    "title": "Sensitivity Analysis: A4 Treated vs A4 Placebo",
+    "section": "",
+    "text": "still need to run this analysis",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs A4 Placebo</span>"
+    ]
+  }
+]
