@@ -208,5 +208,93 @@
     "crumbs": [
       "Longitudinal PACC Analyses"
     ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html",
+    "href": "pacc_sensitivity_sexstratified.html",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "",
+    "text": "Females\nThe following analysis include running PACC ~ GeneExp*Ab in only males and only females in the genes that survived FDR correction in the PACC ~ GeneExp*Sex*Ab analyses.",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html#females",
+    "href": "pacc_sensitivity_sexstratified.html#females",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "",
+    "text": "Summary Table\n\n\n\n\n\n\n\n\nPlotted Output\n\nENSG00000205356ENSG00000162543",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_sexstratified.html#males",
+    "href": "pacc_sensitivity_sexstratified.html#males",
+    "title": "Sensitivity Analysis: Sex Stratified",
+    "section": "Males",
+    "text": "Males\n\nSummary Table\n\n\n\n\n\n\n\n\nPlotted Output\n\nENSG00000279245ENSG00000164308",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html",
+    "href": "pacc_sensitivity_ptauinteract.html",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "",
+    "text": "PACC ~ GeneExp x p-tau217\nThere are 17 significant gene that survives FDR correction.",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#volcano-plot",
+    "href": "pacc_sensitivity_ptauinteract.html#volcano-plot",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Volcano Plot",
+    "text": "Volcano Plot",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#summary-table",
+    "href": "pacc_sensitivity_ptauinteract.html#summary-table",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Summary Table",
+    "text": "Summary Table",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
+    "href": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
+    "title": "Sensitivity Analysis: p-tau interaction",
+    "section": "Significant Results Plots",
+    "text": "Significant Results Plots\n\nENSG00000278434ENSG00000225981",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
+    ]
+  },
+  {
+    "objectID": "pacc_sensitivity_treatvsplacebo.html",
+    "href": "pacc_sensitivity_treatvsplacebo.html",
+    "title": "Sensitivity Analysis: A4 Treated vs A4 Placebo",
+    "section": "",
+    "text": "still need to run this analysis",
+    "crumbs": [
+      "Longitudinal PACC Analyses",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs A4 Placebo</span>"
+    ]
   }
 ]
