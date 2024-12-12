@@ -14,10 +14,10 @@ book:
     - visualizations.qmd
     - manhattan_plots.qmd
     - part: pacc_analyses.qmd
-    #   chapters: 
-    #     - pacc_sensitivity_sexstratified.qmd
-    #     - pacc_sensitivity_ptauinteract.qmd
-    #     - pacc_sensitivity_treatvsplacebo.qmd
+      chapters:
+        - pacc_sensitivity_sexstratified.qmd
+        - pacc_sensitivity_ptauinteract.qmd
+        - pacc_sensitivity_treatvsplacebo.qmd
 
 
 format:
