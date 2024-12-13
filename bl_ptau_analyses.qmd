@@ -4,7 +4,7 @@ title: "Baseline p-tau217 Analyses"
 
 # Significant Results Table
 
-Summary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses:
+Summary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses: 
 
 1.  Baseline p-tau217 \~ GeneExp
 2.  Baseline p-tau217 \~ GeneExp\*Sex
