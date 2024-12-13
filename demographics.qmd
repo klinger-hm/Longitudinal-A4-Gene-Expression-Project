@@ -20,7 +20,7 @@ theme_set(theme_bw())
 ```
 
 ```{r}
-load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
 
 ```
 
@@ -113,8 +113,7 @@ baseline <- baseline %>%
 
 ## PACC Sample
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### All Participants
 
 ```{r}
@@ -162,13 +161,11 @@ tbl_summary(subset(baseline, pacc_tp > 1),
   as_flex_table() %>%
   bold(part = "header")
 ```
-
 :::
 
 ## Amyloid Sample
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### All Participants
 
 ```{r}
@@ -216,13 +213,11 @@ tbl_summary(subset(baseline, !is.na(bl_Amyloid) & ab_tp > 1),
   as_flex_table() %>%
   bold(part = "header")
 ```
-
 :::
 
 ## TAU Sample
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### All Participants
 
 ```{r}
@@ -270,13 +265,11 @@ tbl_summary(subset(baseline, !is.na(tau_tp) & tau_tp > 1),
   as_flex_table() %>%
   bold(part = "header")
 ```
-
 :::
 
 ## pTAU Sample
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### All Participants
 
 ```{r}
@@ -324,5 +317,4 @@ tbl_summary(subset(baseline, !is.na(bl_ptau217) & ptau_tp > 1),
   as_flex_table() %>%
   bold(part = "header")
 ```
-
 :::
