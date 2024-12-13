@@ -20,7 +20,7 @@ theme_set(theme_bw())
 ```
 
 ```{r}
-load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
 ```
 
 ```{r}

@@ -24,14 +24,14 @@ theme_set(theme_bw())
 ```
 
 ```{r}
-load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
 
-gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/A4_RNAseq_GeneNames_081424.rds")
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_RNAseq_GeneNames_081424.rds")
 
 ## PACC Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexE4_Models_2024-12-06.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneAb_Models_2024-12-05.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexAb_Models_2024-12-06.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneSexE4_Models_2024-12-06.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneAb_Models_2024-12-05.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneSexAb_Models_2024-12-06.RData")
 
 # ## Amyloid Models
 # load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_GeneE4_Models_2024-12-07.RData")

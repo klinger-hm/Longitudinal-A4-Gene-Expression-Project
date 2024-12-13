@@ -21,41 +21,41 @@ theme_set(theme_bw())
 
 ```{r}
 ## PACC Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_Gene_Models_2024-09-02.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSex_Models_2024-09-03.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneE4_Models_2024-09-03.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexE4_Models_2024-12-06.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneAb_Models_2024-12-05.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/PACC Models/LME_PACC_GeneSexAb_Models_2024-12-06.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_Gene_Models_2024-09-02.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneSex_Models_2024-09-03.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneE4_Models_2024-09-03.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneSexE4_Models_2024-12-06.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneAb_Models_2024-12-05.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GeneSexAb_Models_2024-12-06.RData")
 
 ## Amyloid Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_Gene_Models_2024-09-13.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_GeneSex_Models_2024-09-16.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_GeneE4_Models_2024-12-07.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Amyloid Models/LME_Ab_GeneSexE4_Models_2024-09-17.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Amyloid Models/LME_Ab_Gene_Models_2024-09-13.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Amyloid Models/LME_Ab_GeneSex_Models_2024-09-16.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Amyloid Models/LME_Ab_GeneE4_Models_2024-12-07.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Amyloid Models/LME_Ab_GeneSexE4_Models_2024-09-17.RData")
 
 ## TAU Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_Gene_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_GeneSex_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_GeneE4_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_GeneSexE4_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_GeneAb_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_MTLTau_GeneSexAb_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_GeneExp_Project/Tau Models/LME_MTLTau_Gene_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneSex_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneE4_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneSexE4_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneAb_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneSexAb_Models_2024-09-12.RData")
 
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_Gene_Models_2024-09-13.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_GeneSex_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_GeneE4_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_GeneSexE4_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_GeneAb_Models_2024-09-12.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Tau Models/LME_NEOTau_GeneSexAb_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_Gene_Models_2024-09-13.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_GeneSex_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_GeneE4_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_GeneSexE4_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_GeneAb_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_NEOTau_GeneSexAb_Models_2024-09-12.RData")
 
 ## Baseline pTAU Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_BL_pTAUTable_Gene_Models_2024-10-08.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_BL_pTAUTable_GeneSex_Models_2024-10-08.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_pTAUTable_GeneE4_Models_2024-10-08.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_pTAUTable_GeneSexE4_Models_2024-10-08.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_pTAUTable_GeneAb_Models_2024-10-08.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/Baseline pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_BL_pTAUTable_Gene_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_BL_pTAUTable_GeneSex_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneE4_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneSexE4_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneAb_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-10-08.RData")
 
 BL_pTAUTable_GeneE4 <- pTAUTable_GeneE4
 BL_pTAUTable_GeneSexE4 <- pTAUTable_GeneSexE4
@@ -70,14 +70,14 @@ BL_pTAUTable_GeneAb$outcome <- "bl_ptau217"
 BL_pTAUTable_GeneSexAb$outcome <- "bl_ptau217"
 
 ## Longitudinal pTAU Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_Gene_Models_2024-09-19.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_GeneSex_Models_2024-09-19.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_GeneE4_Models_2024-09-20.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_GeneSexE4_Models_2024-09-20.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_GeneAb_Models_2024-09-21.RData")
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-09-25.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_Gene_Models_2024-09-19.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneSex_Models_2024-09-19.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneE4_Models_2024-09-20.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneSexE4_Models_2024-09-20.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneAb_Models_2024-09-21.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-09-25.RData")
 
-gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/New Data/A4_RNAseq_GeneNames_081424.rds")
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/New Data/A4_RNAseq_GeneNames_081424.rds")
 gene_names <- select(gene_names, gene = ensembl_gene_id, chromosome_name, external_gene_name)
 ```
 
