@@ -1,0 +1,378 @@
+---
+title: "Baseline p-tau217 Analyses"
+---
+
+# Significant Results Table
+
+Summary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses:
+
+1.  Baseline p-tau217 \~ GeneExp
+2.  Baseline p-tau217 \~ GeneExp\*Sex
+3.  Baseline p-tau217 \~ GeneExp\*E4
+4.  Baseline p-tau217 \~ GeneExp\*Sex\*E4
+5.  Baseline p-tau217 \~ GeneExp\*Ab
+6.  Baseline p-tau217 \~ GeneExp\*Ab\*Sex
+
+
+```{r}
+BL_pTAUTable_GeneE4$predictor <- "Gene*E4"
+BL_pTAUTable_GeneAb$predictor <- "Gene*Ab"
+BL_pTAUTable_GeneSexAb$predictor <- "Gene*Sex*Ab"
+
+All_Genes <- rbind.fill(BL_pTAUTable_GeneE4, BL_pTAUTable_GeneAb,
+                        BL_pTAUTable_GeneSexAb)
+
+All_Genes_Sig <- filter(All_Genes, fdr_p < 0.05)
+all_sig_genes <- unique(All_Genes_Sig$gene)
+```
+
+```{r}
+datatable(All_Genes_Sig,
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>% 
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+```
+
+
+# Analyses {.tabset}
+
+All models adjust for baseline age, sex, BMI, and cohort/treatment (A4 Placebo, A4 Treated, LEARN/SF).
+
+## pTAU \~ Gene x APOEe4 {.tabset}
+
+
+```{r}
+pTAUTable_GeneE4 <- merge(BL_pTAUTable_GeneE4, gene_names, by = "gene", all.x = TRUE)
+
+pTAUTable_GeneE4 <- pTAUTable_GeneE4 %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+There is `r length(subset(pTAUTable_GeneE4, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
+
+### Volcano Plot
+
+```{r}
+
+sig_bon <- -log10(0.05/length(unique(pTAUTable_GeneE4$gene))) #Bonferroni correction for plotting
+
+ggplot(pTAUTable_GeneE4, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position="none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = (0.9*max(pTAUTable_GeneE4$beta)), y = (-log10(0.05)-0.25), label = "p = 0.05", check_overlap = TRUE) +
+  geom_text(x = (0.78*max(pTAUTable_GeneE4$beta)), y = (sig_bon-0.5), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE) +
+  geom_label_repel(aes(label = ifelse(-log10(p) > 5, gene, "")), 
+                   nudge_x = -0.05, nudge_y = -0.05, min.segment.length = 0) +
+  labs(
+    title = bquote(bold(A.)*" Baseline p-tau"[217]*" ~ Gene*APOEε4 Non-adjusted p-values"),
+    x = "β",
+    y = bquote("-log"[10]*"(p)")
+  )
+
+```
+
+### Summary Table
+
+```{r}
+all_sig <- pTAUTable_GeneE4 %>%
+  filter(Sig == T)
+
+datatable(all_sig,
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+
+```
+
+```{r}
+baseline$SEX <- as.factor(baseline$SEX)
+baseline$APOE <- as.factor(baseline$APOE)
+baseline$Cohort <- as.factor(baseline$Cohort)
+```
+
+### Significant Results Plots
+
+::: panel-tabset
+
+```{r}
+fit1 <- lm(bl_ptau217 ~ ENSG00000273139*APOE + SEX + bl_ptau_age_new + 
+            BMIBL + Cohort, data = baseline, na.action = "na.omit")
+
+plot_model(fit1, type = "pred", terms = c("ENSG00000273139", "APOE")) +
+  scale_color_manual(values = c("blue","red")) + 
+  scale_fill_manual(values = c("blue","red")) + 
+  labs(
+    x = "ENSG00000273139",
+    y = bquote("Baseline p-tau"[217]),
+    title = bquote("Baseline p-tau"[217]*" by ENSG00000273139 and APOEε4"),
+    color = "APOEε4 Status"
+  )
+```
+
+:::
+
+## pTAU \~ Gene x Amyloid {.tabset}
+
+```{r}
+pTAUTable_GeneAb <- merge(BL_pTAUTable_GeneAb, gene_names, by = "gene", all.x = TRUE)
+
+pTAUTable_GeneAb <- pTAUTable_GeneAb %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+### Volcano Plot
+
+```{r}
+
+sig_bon <- -log10(0.05/length(unique(pTAUTable_GeneAb$gene))) #Bonferroni correction for plotting
+
+ggplot(pTAUTable_GeneAb, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  #xlim(-1.25,1.25) + 
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position="none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = (0.9*max(pTAUTable_GeneAb$beta)), y = (-log10(0.05)-0.35), label = "p = 0.05", check_overlap = TRUE) +
+  geom_text(x = (0.78*max(pTAUTable_GeneAb$beta)), y = (sig_bon+0.65), label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE) +
+  geom_label_repel(aes(label = ifelse(t < -6, gene, "")), 
+                   nudge_x = -0.05, nudge_y = 0.05, min.segment.length = 0) +
+  labs(
+    title = bquote(bold(B.)*" Baseline p-tau"[217]*" ~ Gene*Amyloid Non-adjusted p-values"),
+    x = "β",
+    y = bquote("-log"[10]*"(p)")
+  )
+
+```
+
+### Summary Table
+
+```{r}
+all_sig <- pTAUTable_GeneAb %>%
+  filter(Sig == T)
+
+datatable(all_sig,
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+
+```
+
+### Significant Results Plots
+
+::: panel-tabset
+
+#### ENSG00000284713
+
+```{r}
+fit1 <- lm(bl_ptau217 ~ ENSG00000284713*bl_Amyloid + SEX + bl_ptau_age_new + 
+            BMIBL + Cohort, data = baseline, na.action = "na.omit")
+
+plot_model(fit1, type = "pred", terms = c("ENSG00000284713", "bl_Amyloid")) +
+  scale_color_manual(values = c("forestgreen","blue","red")) + 
+  scale_fill_manual(values = c("forestgreen","blue","red")) + 
+  labs(
+    x = "ENSG00000284713 (SMIM38)",
+    y = bquote("Baseline p-tau"[217]),
+    title = bquote(bold(A.)*" Baseline p-tau"[217]*" by SMIM38 and Amyloid"),
+    color = "Baseline Global\nAmyloid Burden"
+  )
+
+```
+
+#### ENSG00000248019
+
+```{r}
+fit1 <- lm(bl_ptau217 ~ ENSG00000248019*bl_Amyloid + SEX + bl_ptau_age_new + 
+            BMIBL + Cohort, data = baseline, na.action = "na.omit")
+
+plot_model(fit1, type = "pred", terms = c("ENSG00000248019", "bl_Amyloid")) +
+  scale_color_manual(values = c("forestgreen","blue","red")) + 
+  scale_fill_manual(values = c("forestgreen","blue","red")) + 
+  labs(
+    x = "ENSG00000248019 (FAM13A-AS1)",
+    y = bquote("Baseline p-tau"[217]),
+    title = bquote("Baseline p-tau"[217]*" by FAM13A-AS1 and Amyloid"),
+    color = "Baseline Global\nAmyloid Burden"
+  )
+
+```
+
+:::
+
+## pTAU \~ Gene x Sex x Amyloid {.tabset}
+
+```{r}
+bl_model_loops <- function(data, genes, outcome, predictor, covariates, main, tab_name, folder, mod_type){
+  ModelTable <- data.frame(gene = character(length(genes)), beta = numeric(length(genes)), se = numeric(length(genes)), t = numeric(length(genes)), p = numeric(length(genes)))
+  
+  for (i in 1:length(genes)){
+    modelSum <- summary(lm(reformulate(c(paste0(genes[i], predictor), covariates), response = outcome), 
+                            data = data, na.action = "na.omit"
+    ))
+    ModelTable[i,2:5] <- modelSum$coefficients[which(rownames(modelSum$coefficients) == paste0(genes[i], main)),]
+    ModelTable[i,1] <- genes[i]
+  }
+  ModelTable$fdr_p <- NA
+  ModelTable$outcome <- outcome
+  assign(tab_name, ModelTable, .GlobalEnv)
+}
+```
+
+```{r}
+bl_model_loops(data = subset(baseline, SEX == "Female"), 
+            genes = subset(BL_pTAUTable_GeneSexAb, fdr_p < 0.05)$gene,
+            outcome = "bl_ptau217",
+            predictor = "*bl_Amyloid",
+            covariates = c("bl_ptau_age_new", "Cohort", "BMIBL"),
+            main = ":bl_Amyloid",
+            tab_name = "tmp1",
+            folder = "Baseline pTAU Models",
+            mod_type = "pTAUTable_GeneSexAb")
+
+tmp1$Subset <- "Females"
+BL_pTAUTable_GeneSexAb$Subset <- "All"
+
+pTAUTable_GeneSexAb <- rbind.fill(BL_pTAUTable_GeneSexAb, tmp1)
+
+bl_model_loops(data = subset(baseline, SEX == "Male"), 
+            genes = subset(BL_pTAUTable_GeneSexAb, fdr_p < 0.05)$gene,
+            outcome = "bl_ptau217",
+            predictor = "*bl_Amyloid",
+            covariates = c("bl_ptau_age_new", "Cohort", "BMIBL"),
+            main = ":bl_Amyloid",
+            tab_name = "tmp2",
+            folder = "Baseline pTAU Models",
+            mod_type = "pTAUTable_GeneAb")
+
+tmp2$Subset <- "Males"
+
+pTAUTable_GeneSexAb <- rbind.fill(pTAUTable_GeneSexAb, tmp2)
+```
+
+```{r}
+pTAUTable_GeneSexAb$new_fdr_p <- p.adjust(pTAUTable_GeneSexAb$p, method = "fdr")
+
+pTAUTable_GeneSexAb$fdr_p <- ifelse(is.na(pTAUTable_GeneSexAb$fdr_p), pTAUTable_GeneSexAb$new_fdr_p, pTAUTable_GeneSexAb$fdr_p)
+pTAUTable_GeneSexAb <- select(pTAUTable_GeneSexAb, -c(new_fdr_p))
+```
+
+```{r}
+pTAUTable_GeneSexAb <- merge(pTAUTable_GeneSexAb, gene_names, by = "gene", all.x = TRUE)
+
+pTAUTable_GeneSexAb <- pTAUTable_GeneSexAb %>%
+  mutate(Sig = case_when(
+    p < 0.05 ~ T,
+    TRUE ~ F
+  ))
+```
+
+### Volcano Plot
+
+```{r}
+
+sig_bon <- -log10(0.05/length(unique(subset(pTAUTable_GeneSexAb, Subset == "All")$gene))) #Bonferroni correction for plotting
+
+ggplot(pTAUTable_GeneSexAb, aes(x = beta, y = -log10(p), color = Sig)) +
+  geom_point() +
+  geom_hline(yintercept = -log10(0.05), color = "red", linetype = "dashed", size = 1.2) +
+  geom_hline(yintercept = sig_bon, color = "blue", linetype = "dashed", size = 1) +
+  theme(legend.position="none") +
+  scale_colour_manual(values = setNames(c('seagreen','black'), c(T,F))) +
+  geom_text(x = 2.95, y = (-log10(0.05)-0.35), label = "p = 0.05", check_overlap = TRUE) +
+  geom_text(x = 2.7, y = 4.7, label = "p = 0.05 \n Bonferroni corrected", check_overlap = TRUE) +
+  geom_label_repel(aes(label = ifelse(t < -6, gene, "")), 
+                   nudge_x = -0.05, nudge_y = -0.05, min.segment.length = 0) +
+  labs(
+    title = bquote(bold(C.)*" Baseline p-tau"[217]*" ~ Gene*Amyloid*Sex Non-adjusted p-values"),
+    x = "β",
+    y = bquote("-log"[10]*"(p)")
+  )
+
+```
+
+### Summary Table
+
+```{r}
+datatable(subset(pTAUTable_GeneSexAb, Subset == "All" & fdr_p < 0.05),
+          filter = "top",
+          rownames = FALSE,
+          extensions = c('Buttons'),
+          options = list(dom = 'Btip',
+                         buttons = c('copy', 'csv'),
+                         pageLength = 15,
+                         columnDefs = list(list(className = 'dt-center', targets = "_all")))) %>%
+  formatRound(columns = c("beta","se", "t", "p", "fdr_p"), digits = 4) %>%
+  formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
+
+```
+
+### Significant Results Plots
+
+::: panel-tabset
+
+#### ENSG00000139211
+
+```{r}
+fit2 <- lm(bl_ptau217 ~ ENSG00000139211*SEX*bl_Amyloid + bl_ptau_age_new + 
+            BMIBL + Cohort, data = baseline, na.action = "na.omit")
+
+plot_model(fit2, type = "pred", terms = c("ENSG00000139211", "bl_Amyloid", "SEX")) +
+  scale_color_manual(values = c("forestgreen","blue","red")) + 
+  scale_fill_manual(values = c("forestgreen","blue","red")) + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "ENSG00000139211 (AMIGO2)",
+    y = bquote("Baseline p-tau"[217]),
+    title = bquote(bold(B.)*" Baseline p-tau"[217]*" by AMIGO2, Amyloid, and Sex"),
+    color = "Baseline Global\nAmyloid Burden"
+  )
+```
+
+#### ENSG00000188452
+
+```{r}
+fit2 <- lm(bl_ptau217 ~ ENSG00000188452*SEX*bl_Amyloid + bl_ptau_age_new + 
+            BMIBL + Cohort, data = baseline, na.action = "na.omit")
+
+plot_model(fit2, type = "pred", terms = c("ENSG00000188452", "bl_Amyloid", "SEX")) +
+  scale_color_manual(values = c("forestgreen","blue","red")) + 
+  scale_fill_manual(values = c("forestgreen","blue","red")) + 
+  theme(strip.background = element_rect(fill = "white")) +
+  ylim(-0.1,0.65) +
+  labs(
+    x = "ENSG00000188452 (CERKL)",
+    y = bquote("Baseline p-tau"[217]),
+    title = bquote("Baseline p-tau"[217]*" by CERKL, Amyloid, and Sex"),
+    color = "Baseline Global\nAmyloid Burden"
+  )
+```
+
+:::
