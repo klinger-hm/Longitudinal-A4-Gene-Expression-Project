@@ -2,9 +2,45 @@
 title: "Baseline p-tau217 Analyses"
 ---
 
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+
+```
+
+```{r}
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
+
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_RNAseq_GeneNames_081424.rds")
+
+gene_names <- select(gene_names, gene = ensembl_gene_id, chromosome_name, external_gene_name)
+
+## Baseline pTAU Models
+
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneE4_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneAb_Models_2024-10-08.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Baseline pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-10-08.RData")
+
+BL_pTAUTable_GeneE4 <- pTAUTable_GeneE4
+BL_pTAUTable_GeneAb <- pTAUTable_GeneAb
+BL_pTAUTable_GeneSexAb <- pTAUTable_GeneSexAb
+```
+
 # Significant Results Table
 
-Summary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses: 
+Summary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses:
 
 1.  Baseline p-tau217 \~ GeneExp
 2.  Baseline p-tau217 \~ GeneExp\*Sex
@@ -12,7 +48,6 @@ Summary table of all significant results (after fdr correction) from the followi
 4.  Baseline p-tau217 \~ GeneExp\*Sex\*E4
 5.  Baseline p-tau217 \~ GeneExp\*Ab
 6.  Baseline p-tau217 \~ GeneExp\*Ab\*Sex
-
 
 ```{r}
 BL_pTAUTable_GeneE4$predictor <- "Gene*E4"
@@ -39,13 +74,11 @@ datatable(All_Genes_Sig,
   formatStyle("fdr_p", color = styleInterval(0.05, c("red", "black")))
 ```
 
-
 # Analyses {.tabset}
 
 All models adjust for baseline age, sex, BMI, and cohort/treatment (A4 Placebo, A4 Treated, LEARN/SF).
 
 ## pTAU \~ Gene x APOEe4 {.tabset}
-
 
 ```{r}
 pTAUTable_GeneE4 <- merge(BL_pTAUTable_GeneE4, gene_names, by = "gene", all.x = TRUE)
@@ -111,7 +144,6 @@ baseline$Cohort <- as.factor(baseline$Cohort)
 ### Significant Results Plots
 
 ::: panel-tabset
-
 ```{r}
 fit1 <- lm(bl_ptau217 ~ ENSG00000273139*APOE + SEX + bl_ptau_age_new + 
             BMIBL + Cohort, data = baseline, na.action = "na.omit")
@@ -126,7 +158,6 @@ plot_model(fit1, type = "pred", terms = c("ENSG00000273139", "APOE")) +
     color = "APOEε4 Status"
   )
 ```
-
 :::
 
 ## pTAU \~ Gene x Amyloid {.tabset}
@@ -188,7 +219,6 @@ datatable(all_sig,
 ### Significant Results Plots
 
 ::: panel-tabset
-
 #### ENSG00000284713
 
 ```{r}
@@ -224,7 +254,6 @@ plot_model(fit1, type = "pred", terms = c("ENSG00000248019", "bl_Amyloid")) +
   )
 
 ```
-
 :::
 
 ## pTAU \~ Gene x Sex x Amyloid {.tabset}
@@ -337,7 +366,6 @@ datatable(subset(pTAUTable_GeneSexAb, Subset == "All" & fdr_p < 0.05),
 ### Significant Results Plots
 
 ::: panel-tabset
-
 #### ENSG00000139211
 
 ```{r}
@@ -374,5 +402,4 @@ plot_model(fit2, type = "pred", terms = c("ENSG00000188452", "bl_Amyloid", "SEX"
     color = "Baseline Global\nAmyloid Burden"
   )
 ```
-
 :::

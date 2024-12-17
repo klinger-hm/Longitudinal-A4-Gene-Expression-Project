@@ -2,8 +2,6 @@
 title: "Project Overview"
 ---
 
-test test test
-
 The data used for this project includes **all** A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.
 
 Project Aims:
