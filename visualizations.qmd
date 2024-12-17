@@ -1,0 +1,93 @@
+---
+title: "Visualizations"
+---
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+```
+
+```{r}
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+```
+
+```{r}
+bl_ptau <- rna %>%
+  filter(!is.na(ptau217)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_ptau217 = ptau217, bl_ptau_age_new = ptau_age)
+```
+
+## Longitudinal PACC
+
+```{r}
+ggplot(rna, aes(x = pacc_time, y = PACC)) + 
+  geom_line(aes(group = BID)) + 
+  labs(
+    x = "Time (years)",
+    y = "PACC",
+    title = "Longitudinal PACC"
+    )
+```
+
+## Longitudinal Amyloid
+
+```{r}
+ggplot(rna, aes(x = ab_time, y = suvr_cer)) + 
+  geom_line(aes(group = BID)) + 
+  labs(
+    x = "Time (years)",
+    y = "Amyloid",
+    title = "Longitudinal Amyloid"
+    )
+```
+
+## Longitudinal Tau
+
+```{r}
+ggplot(rna, aes(x = tau_time, y = MTL)) + 
+  geom_line(aes(group = BID)) + 
+  labs(
+    x = "Time (years)",
+    y = "Medial Temporal Lobe Tau",
+    title = "Longitudinal MTL Tau"
+    )
+```
+
+## Longitudinal p-tau217
+
+```{r}
+ggplot(rna, aes(x = ptau_time, y = as.numeric(ptau217))) + 
+  geom_line(aes(group = BID)) + 
+  labs(
+    x = "Time (years)",
+    y = "p-tau217",
+    title = "Longitudinal p-tau217"
+    )
+```
+
+## Baseline p-tau217
+
+```{r}
+ggplot(bl_ptau, aes(x = as.numeric(bl_ptau217))) +
+  geom_histogram(color = "white", fill = "steelblue") +
+  labs(
+    x = "Baseline pTau-217",
+    y = "Frequency",
+    title = "Baseline pTau-217"
+    )
+```

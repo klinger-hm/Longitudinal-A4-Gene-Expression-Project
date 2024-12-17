@@ -10,6 +10,7 @@ book:
   date: "`r Sys.Date()`"
   chapters:
     - index.qmd
+<<<<<<< HEAD
     # - demographics.qmd
     # - visualizations.qmd
     # - manhattan_plots.qmd
@@ -20,6 +21,16 @@ book:
     #     - pacc_sensitivity_treatvsplacebo.qmd
     # - part: bl_ptau_analyses.qmd 
       
+=======
+    - demographics.qmd
+    - visualizations.qmd
+    - manhattan_plots.qmd
+    - part: pacc_analyses.qmd
+      chapters:
+        - pacc_sensitivity_sexstratified.qmd
+        - pacc_sensitivity_ptauinteract.qmd
+        - pacc_sensitivity_treatvsplacebo.qmd
+>>>>>>> origin/main
 
 
 format:
