@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Longitudinal A4 & Gene Expression Project",
     "section": "",
-    "text": "test test test\nThe data used for this project includes all A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.\nProject Aims:\n\nTest the association of gene expression with longitudinal PACC, longitudinal amyloid, longitudinal tau, longitudinal ptau, and baseline ptau.\nSee if these associations are modified by sex, APOEe4 status, sex x APOEe4 status, amyloid burden, amyloid burden x sex.\n\nSensitivity Analyses:\n\nRun significant sex moderated models in just females and just males.\nRun analyses in just LEARN vs A4 Placebo and LEARN vs A4 Treated.",
+    "text": "The data used for this project includes all A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.\nProject Aims:\n\nTest the association of gene expression with longitudinal PACC, longitudinal amyloid, longitudinal tau, longitudinal ptau, and baseline ptau.\nSee if these associations are modified by sex, APOEe4 status, sex x APOEe4 status, amyloid burden, amyloid burden x sex.\n\nSensitivity Analyses:\n\nRun significant sex moderated models in just females and just males.\nRun analyses in just LEARN vs A4 Placebo and LEARN vs A4 Treated.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Project Overview</span>"
     ]
@@ -295,6 +295,46 @@
     "crumbs": [
       "Longitudinal PACC Analyses",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs A4 Placebo</span>"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html",
+    "href": "bl_ptau_analyses.html",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "",
+    "text": "Significant Results Table\nSummary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses:",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-apoee4",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-apoee4",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x APOEe4",
+    "text": "pTAU ~ Gene x APOEe4\nThere is 1 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-amyloid",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-amyloid",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x Amyloid",
+    "text": "pTAU ~ Gene x Amyloid\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000284713ENSG00000248019",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-sex-x-amyloid",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-sex-x-amyloid",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x Sex x Amyloid",
+    "text": "pTAU ~ Gene x Sex x Amyloid\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000139211ENSG00000188452",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
     ]
   }
 ]
