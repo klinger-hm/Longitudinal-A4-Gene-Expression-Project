@@ -36,6 +36,29 @@ load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4
 BL_pTAUTable_GeneE4 <- pTAUTable_GeneE4
 BL_pTAUTable_GeneAb <- pTAUTable_GeneAb
 BL_pTAUTable_GeneSexAb <- pTAUTable_GeneSexAb
+
+baseline <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1)
+
+bl_amyloid <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score)
+
+bl_ptau <- rna %>%
+  filter(!is.na(ptau217)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_ptau217 = ptau217, bl_ptau_age_new = ptau_age)
+
+baseline <- merge(baseline, bl_amyloid, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, bl_ptau, by = "BID", all.x = TRUE)
+
 ```
 
 # Significant Results Table
