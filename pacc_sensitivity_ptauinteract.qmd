@@ -20,9 +20,9 @@ theme_set(theme_bw())
 ```
 
 ```{r}
-load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_ProjectData/RNAseqData_Autosomal_XLinked_wDose_120424.RData")
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
 
-gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_ProjectData/A4_RNAseq_GeneNames_081424.rds")
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_RNAseq_GeneNames_081424.rds")
 
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/PACC Models/LME_PACC_GenePtau_Models_2024-12-11.RData")
 ```

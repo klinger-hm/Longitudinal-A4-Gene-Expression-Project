@@ -214,7 +214,7 @@
     "href": "pacc_sensitivity_sexstratified.html",
     "title": "Sensitivity Analysis: Sex Stratified",
     "section": "",
-    "text": "Females\nThe following analysis include running PACC ~ GeneExp*Ab in only males and only females in the genes that survived FDR correction in the PACC ~ GeneExp*Sex*Ab analyses.",
+    "text": "Females",
     "crumbs": [
       "Longitudinal PACC Analyses",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sensitivity Analysis: Sex Stratified</span>"

@@ -35,7 +35,7 @@ load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Amyloid Models/LME_Ab_GeneSexE4_Models_2024-09-17.RData")
 
 ## TAU Models
-load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_GeneExp_Project/Tau Models/LME_MTLTau_Gene_Models_2024-09-12.RData")
+load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_Gene_Models_2024-09-12.RData")
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneSex_Models_2024-09-12.RData")
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneE4_Models_2024-09-12.RData")
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/Tau Models/LME_MTLTau_GeneSexE4_Models_2024-09-12.RData")
@@ -77,7 +77,7 @@ load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneAb_Models_2024-09-21.RData")
 load("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/pTAU Models/LME_pTAUTable_GeneSexAb_Models_2024-09-25.RData")
 
-gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/New Data/A4_RNAseq_GeneNames_081424.rds")
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_RNAseq_GeneNames_081424.rds")
 gene_names <- select(gene_names, gene = ensembl_gene_id, chromosome_name, external_gene_name)
 ```
 
