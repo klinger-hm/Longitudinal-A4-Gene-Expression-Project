@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Longitudinal A4 & Gene Expression Project",
     "section": "",
-    "text": "The data used for this project includes all A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.\nProject Aims:\n\nTest the association of gene expression with longitudinal PACC, longitudinal amyloid, longitudinal tau, longitudinal ptau, and baseline ptau.\nSee if these associations are modified by sex, APOEe4 status, sex x APOEe4 status, amyloid burden, amyloid burden x sex.\n\nSensitivity Analyses:\n\nRun significant sex moderated models in just females and just males.\nRun analyses in just LEARN vs A4 Placebo and LEARN vs A4 Treated.",
+    "text": "test test test\nThe data used for this project includes all A4 and LEARN participants (including screen fails) with Autosomal and X-linked RNAseq data available (N = 1,737). The longitudinal data includes all available follow up, including the open label period.\nProject Aims:\n\nTest the association of gene expression with longitudinal PACC, longitudinal amyloid, longitudinal tau, longitudinal ptau, and baseline ptau.\nSee if these associations are modified by sex, APOEe4 status, sex x APOEe4 status, amyloid burden, amyloid burden x sex.\n\nSensitivity Analyses:\n\nRun significant sex moderated models in just females and just males.\nRun analyses in just LEARN vs A4 Placebo and LEARN vs A4 Treated.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Project Overview</span>"
     ]
