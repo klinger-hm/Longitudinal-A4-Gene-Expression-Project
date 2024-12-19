@@ -434,7 +434,7 @@ p[[2]] +
 ```
 :::
 
-# PACC \~ Gene x p-tau
+## PACC \~ Gene x p-tau
 
 ```{r}
 PACCTable_GenePtau_wDose <- PACCTable_GenePtau_wDose %>%
@@ -447,7 +447,7 @@ PACCTable_GenePtau_wDose <- PACCTable_GenePtau_wDose %>%
 
 There are `r length(subset(PACCTable_GenePtau_wDose, fdr_p < 0.05)$gene)` significant gene that survives FDR correction.
 
-## Volcano Plot
+### Volcano Plot
 
 ```{r}
 sig_bon <- -log10(0.05/length(unique(PACCTable_GenePtau_wDose$gene))) #Bonferroni correction for plotting
@@ -467,7 +467,7 @@ ggplot(PACCTable_GenePtau_wDose, aes(x = beta, y = -log10(p), color = Sig)) +
   )
 ```
 
-## Summary Table
+### Summary Table
 
 ```{r}
 datatable(subset(PACCTable_GenePtau_wDose, Sig == T),
@@ -503,10 +503,10 @@ rna_ptau <- arrange(rna_ptau, pacc_time)
 rna_ptau$bl_ptau217 <- as.numeric(rna_ptau$bl_ptau217)
 ```
 
-## Significant Results Plots {.tabset}
+### Significant Results Plots {.tabset}
 
 ::: panel-tabset
-### ENSG00000278434
+#### ENSG00000278434
 
 ```{r, fig.width = 12}
 fit <- lme(PACC ~ ENSG00000278434*bl_ptau217*pacc_time + bl_pacc_age*pacc_time +
@@ -525,7 +525,7 @@ plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000278434", "bl_pta
   )
 ```
 
-### ENSG00000225981
+#### ENSG00000225981
 
 ```{r, fig.width = 12}
 fit <- lme(PACC ~ ENSG00000225981*bl_ptau217*pacc_time + bl_pacc_age*pacc_time +
