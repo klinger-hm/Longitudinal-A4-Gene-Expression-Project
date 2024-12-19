@@ -210,31 +210,11 @@
     ]
   },
   {
-    "objectID": "pacc_analyses.html#volcano-plot-3",
-    "href": "pacc_analyses.html#volcano-plot-3",
+    "objectID": "pacc_analyses.html#pacc-gene-x-p-tau",
+    "href": "pacc_analyses.html#pacc-gene-x-p-tau",
     "title": "Longitudinal PACC Analyses",
-    "section": "Volcano Plot",
-    "text": "Volcano Plot",
-    "crumbs": [
-      "Longitudinal PACC Analyses"
-    ]
-  },
-  {
-    "objectID": "pacc_analyses.html#summary-table-3",
-    "href": "pacc_analyses.html#summary-table-3",
-    "title": "Longitudinal PACC Analyses",
-    "section": "Summary Table",
-    "text": "Summary Table",
-    "crumbs": [
-      "Longitudinal PACC Analyses"
-    ]
-  },
-  {
-    "objectID": "pacc_analyses.html#significant-results-plots-3",
-    "href": "pacc_analyses.html#significant-results-plots-3",
-    "title": "Longitudinal PACC Analyses",
-    "section": "Significant Results Plots",
-    "text": "Significant Results Plots\n\nENSG00000278434ENSG00000225981",
+    "section": "PACC ~ Gene x p-tau",
+    "text": "PACC ~ Gene x p-tau\nThere are 17 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000278434ENSG00000225981",
     "crumbs": [
       "Longitudinal PACC Analyses"
     ]
