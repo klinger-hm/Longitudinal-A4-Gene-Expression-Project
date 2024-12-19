@@ -210,6 +210,36 @@
     ]
   },
   {
+    "objectID": "pacc_analyses.html#volcano-plot-3",
+    "href": "pacc_analyses.html#volcano-plot-3",
+    "title": "Longitudinal PACC Analyses",
+    "section": "Volcano Plot",
+    "text": "Volcano Plot",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#summary-table-3",
+    "href": "pacc_analyses.html#summary-table-3",
+    "title": "Longitudinal PACC Analyses",
+    "section": "Summary Table",
+    "text": "Summary Table",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
+    "objectID": "pacc_analyses.html#significant-results-plots-3",
+    "href": "pacc_analyses.html#significant-results-plots-3",
+    "title": "Longitudinal PACC Analyses",
+    "section": "Significant Results Plots",
+    "text": "Significant Results Plots\n\nENSG00000278434ENSG00000225981",
+    "crumbs": [
+      "Longitudinal PACC Analyses"
+    ]
+  },
+  {
     "objectID": "pacc_sensitivity_sexstratified.html",
     "href": "pacc_sensitivity_sexstratified.html",
     "title": "Sensitivity Analysis: Sex Stratified",
@@ -243,50 +273,6 @@
     ]
   },
   {
-    "objectID": "pacc_sensitivity_ptauinteract.html",
-    "href": "pacc_sensitivity_ptauinteract.html",
-    "title": "Sensitivity Analysis: p-tau interaction",
-    "section": "",
-    "text": "PACC ~ GeneExp x p-tau217\nThere are 17 significant gene that survives FDR correction.",
-    "crumbs": [
-      "Longitudinal PACC Analyses",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
-    ]
-  },
-  {
-    "objectID": "pacc_sensitivity_ptauinteract.html#volcano-plot",
-    "href": "pacc_sensitivity_ptauinteract.html#volcano-plot",
-    "title": "Sensitivity Analysis: p-tau interaction",
-    "section": "Volcano Plot",
-    "text": "Volcano Plot",
-    "crumbs": [
-      "Longitudinal PACC Analyses",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
-    ]
-  },
-  {
-    "objectID": "pacc_sensitivity_ptauinteract.html#summary-table",
-    "href": "pacc_sensitivity_ptauinteract.html#summary-table",
-    "title": "Sensitivity Analysis: p-tau interaction",
-    "section": "Summary Table",
-    "text": "Summary Table",
-    "crumbs": [
-      "Longitudinal PACC Analyses",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
-    ]
-  },
-  {
-    "objectID": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
-    "href": "pacc_sensitivity_ptauinteract.html#significant-results-plots",
-    "title": "Sensitivity Analysis: p-tau interaction",
-    "section": "Significant Results Plots",
-    "text": "Significant Results Plots\n\nENSG00000278434ENSG00000225981",
-    "crumbs": [
-      "Longitudinal PACC Analyses",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: p-tau interaction</span>"
-    ]
-  },
-  {
     "objectID": "pacc_sensitivity_treatvsplacebo.html",
     "href": "pacc_sensitivity_treatvsplacebo.html",
     "title": "Sensitivity Analysis: A4 Treated vs A4 Placebo",
@@ -294,7 +280,58 @@
     "text": "still need to run this analysis",
     "crumbs": [
       "Longitudinal PACC Analyses",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs A4 Placebo</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs A4 Placebo</span>"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html",
+    "href": "bl_ptau_analyses.html",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "",
+    "text": "Significant Results Table\nSummary table of all significant results (after fdr correction) from the following baseline p-tau217 analyses:",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-apoee4",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-apoee4",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x APOEe4",
+    "text": "pTAU ~ Gene x APOEe4\nThere is 1 significant gene that survives FDR correction.\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-amyloid",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-amyloid",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x Amyloid",
+    "text": "pTAU ~ Gene x Amyloid\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000284713ENSG00000248019",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_analyses.html#ptau-gene-x-sex-x-amyloid",
+    "href": "bl_ptau_analyses.html#ptau-gene-x-sex-x-amyloid",
+    "title": "Baseline p-tau217 Analyses",
+    "section": "pTAU ~ Gene x Sex x Amyloid",
+    "text": "pTAU ~ Gene x Sex x Amyloid\n\nVolcano Plot\n\n\n\n\n\n\n\n\n\n\n\nSummary Table\n\n\n\n\n\n\n\n\nSignificant Results Plots\n\nENSG00000139211ENSG00000188452",
+    "crumbs": [
+      "Baseline p-tau217 Analyses"
+    ]
+  },
+  {
+    "objectID": "bl_ptau_sensitivity_treatvsplacebo.html",
+    "href": "bl_ptau_sensitivity_treatvsplacebo.html",
+    "title": "Sensitivity Analysis: A4 Treated vs Placebo",
+    "section": "",
+    "text": "Need to add in this code.",
+    "crumbs": [
+      "Baseline p-tau217 Analyses",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Sensitivity Analysis: A4 Treated vs Placebo</span>"
     ]
   }
 ]
