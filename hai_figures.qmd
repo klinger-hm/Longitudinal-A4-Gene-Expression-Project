@@ -1,0 +1,206 @@
+---
+title: "HAI Figures"
+---
+
+```{r setup, include = FALSE, warning = FALSE, message = FALSE}
+library(plyr)
+library(nlme)
+library(ggplot2)
+library(sjPlot)
+library(dplyr)
+library(gtsummary)
+library(flextable)
+library(ggrepel)
+library(readr)
+library(DT)
+library(tidyr)
+library(grid) 
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+theme_set(theme_bw())
+
+load(file = "~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/RNAseqData_Autosomal_XLinked_wDose_121124.RData")
+
+gene_names <- readRDS("~/Dropbox (Partners HealthCare)/Mabel/Longitudinal A4 & Gene Expression/A4_GeneExp_Project/Data/A4_RNAseq_GeneNames_081424.rds")
+```
+
+```{r}
+baseline <- rna %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1)
+
+bl_amyloid <- rna %>%
+  filter(!is.na(suvr_cer)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_Amyloid = suvr_cer, bl_AmyloidStatus = overall_score)
+
+bl_ptau <- rna %>%
+  filter(!is.na(ptau217)) %>%
+  group_by(BID) %>%
+  arrange(BID, pacc_time) %>%
+  slice(1) %>%
+  select(BID, bl_ptau217 = ptau217, bl_ptau_age_new = ptau_age)
+
+baseline <- merge(baseline, bl_amyloid, by = "BID", all.x = TRUE)
+baseline <- merge(baseline, bl_ptau, by = "BID", all.x = TRUE)
+
+rna <- merge(rna, bl_amyloid, by = "BID", all.x = T)
+rna <- merge(rna, bl_ptau, by = "BID", all.x = T)
+
+rna$SEX <- as.factor(rna$SEX)
+rna$APOE <- as.factor(rna$APOE)
+rna$Cohort <- as.factor(rna$Cohort)
+rna$QSVERSION <- as.factor(rna$QSVERSION)
+```
+
+# PACC Analyses
+
+```{r}
+### Amyloid ~ Gene*APOE
+
+fit <- lme(suvr_cer ~ ENSG00000233785*APOE*ab_time + bl_ab_age*ab_time + SEX*ab_time + Cohort*ab_time + Cumulative_Dose_Scaled, data = rna, random =~ ab_time | BID, na.action = "na.omit", control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+p <- plot_model(fit, type = "pred", terms = c("ab_time", "ENSG00000233785", "APOE"))
+levels(p$data$facet) <- c("ε4-", "ε4+")
+
+p2_a <- p + theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal Aβ-PET",
+    title = bquote(bold(A.)*"Longitudinal Aβ-PET by SAT1-DT and APOEε4"),
+    color = "ENSG00000233785\n(SAT1-DT)"
+  )
+```
+
+
+```{r}
+### PACC ~ Gene*SEX*APOE
+
+fit <- lme(PACC ~ ENSG00000211745*SEX*APOE*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+p <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000211745", "SEX", "APOE"))
+
+p2_b <- p[[1]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote(bold(C.)*"Longitudinal PACC by TRBV4-2, Sex, and APOEε4"),
+    color = "ENSG00000233785\n(TRBV4-2)"
+  ) + 
+  p[[2]] +
+  theme(strip.background = element_rect(fill = "white")) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    color = "ENSG00000233785\n(TRBV4-2)"
+  )
+```
+
+```{r}
+### PACC ~ Gene*Amyloid
+
+fit <- lme(PACC ~ ENSG00000240132*bl_Amyloid*pacc_time + SEX*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+p1 <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000240132", "bl_Amyloid"))
+levels(p1$data$facet) <- c("Aβ = 0.97", "Aβ = 1.18", "Aβ = 1.39")
+p2_c <- p1 + 
+  theme(strip.background = element_rect(fill = "white")) +
+  ylim(-7.5,6.5) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote(bold(B.)*" Longitudinal PACC by ETF1P2 and Aβ-PET"),
+    color = "ENSG00000240132\n(ETF1P2)"
+  )
+```
+
+```{r}
+### PACC ~ Gene*Amyloid*Sex
+rna_lab <- dplyr::rename(rna, Sex = SEX)
+
+fit <- lme(PACC ~ ENSG00000176371*bl_Amyloid*Sex*pacc_time + bl_pacc_age*pacc_time + EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna_lab, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+p <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000176371", "bl_Amyloid", "Sex"))
+levels(p[[1]]$data$facet) <- c("Aβ = 0.97", "Aβ = 1.18", "Aβ = 1.39")
+levels(p[[2]]$data$facet) <- c("Aβ = 0.97", "Aβ = 1.18", "Aβ = 1.39")
+
+p2_d <- p[[1]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  ylim(-7.5,6.5) +
+  labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote(bold(E.)*" Longitudinal PACC by ZSCAN2, Sex, and Aβ-PET"),
+    color = "ENSG00000176371\n(ZSCAN2)"
+  ) +
+  p[[2]] + 
+  theme(strip.background = element_rect(fill = "white")) +
+  ylim(-7.5,6.5) +
+  labs(
+    x = "Time (Years)",
+    y = "",
+    color = "ENSG00000176371\n(ZSCAN2)"
+  )
+```
+
+```{r}
+### PACC ~ Gene x ptau
+
+rna_ptau <- filter(rna, !is.na(bl_ptau217) & bl_ptau217 != "")
+rna_ptau <- arrange(rna_ptau, pacc_time)
+rna_ptau$bl_ptau217 <- as.numeric(rna_ptau$bl_ptau217)
+
+fit <- lme(PACC ~ ENSG00000278434*bl_ptau217*pacc_time + bl_pacc_age*pacc_time +
+             EDCCNTU*pacc_time + Cohort*pacc_time + QSVERSION + Cumulative_Dose_Scaled, 
+           data = rna_ptau, random =~ pacc_time | BID, na.action = "na.omit", 
+           control = list(opt = 'optim', msMaxIter = 1000, msMaxEval = 1000))
+
+
+p <- plot_model(fit, type = "pred", terms = c("pacc_time", "ENSG00000278434", "bl_ptau217"))
+
+levels(p$data$facet) <- c("p-tau217 = 0.09", "p-tau217 = 0.23", "p-tau217 = 0.37")
+#bquote("p-tau"[217]*" = 0.09")
+
+
+p2_e <-  p + theme(strip.background = element_rect(fill = "white")) +
+labs(
+    x = "Time (Years)",
+    y = "Longitudinal PACC",
+    title = bquote(bold(D.)*"Longitudinal PACC by TRAF5 and Baseline p-tau"[217]),
+    color = "ENSG00000278434\n(TRAF5)"
+  )
+```
+
+```{r}
+# 
+# pushViewport(viewport(layout = grid.layout(4,2)))
+# 
+# vplayout <- function(x, y) viewport(layout.pos.row = x, layout.pos.col = y)
+# print(p2_a, vp = vplayout(1, 1))
+# print(p2_c, vp = vplayout(1, 2))
+# print(p2_b, vp = vplayout(2, 1:2))
+# print(p2_e, vp = vplayout(3, 1:2))
+# print(p2_d, vp = vplayout(4, 1:2))
+```
+
+
+```{r, fig.width = 10}
+p2_a
+p2_c
+p2_b
+p2_e
+p2_d
+```
+
