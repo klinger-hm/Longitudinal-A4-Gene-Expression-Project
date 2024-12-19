@@ -19,6 +19,7 @@ book:
         - pacc_sensitivity_ptauinteract.qmd
         - pacc_sensitivity_treatvsplacebo.qmd
     - part: bl_ptau_analyses.qmd 
+        - bl_ptau_sensitivity_treatvsplacebo.qmd
       
 format:
   html:
